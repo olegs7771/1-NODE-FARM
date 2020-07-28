@@ -39,7 +39,12 @@ const server = http.createServer((req, res) => {
   if (pathName === "/" || pathName === "/overview") {
     res.end("Hello from the Overview!!");
   } else if (pathName === "/product") {
-    res.end("product");
+    fs.readFile(`${__dirname}/templates/product.html`, (err, data) => {
+      res.writeHead(200, {
+        "Content-type": "text/html",
+      });
+      res.end(data);
+    });
   } else if (pathName === "/api") {
     //Read File
     res.writeHead(200, {
